@@ -1,157 +1,3 @@
-<?php
-require_once 'config.php';
-
-// Link Direct Gambar Google Drive Logo
-$logo_url = "https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip";
-
-// Proses Verifikasi Password Masuk
-$error = '';
-if (isset($_POST['unlock_site'])) {
-    $pass_input = trim($_POST['site_password']);
-    if ($pass_input === 'kelasxig80') {
-        $_SESSION['site_unlocked'] = true;
-        header("Location: index.php");
-        exit;
-    } else {
-        $error = "Password Akses Salah!";
-    }
-}
-
-// LOGOUT / KUNCI KEMBALI
-if (isset($_GET['lock'])) {
-    unset($_SESSION['site_unlocked']);
-    session_destroy();
-    header("Location: index.php");
-    exit;
-}
-
-// JIKA BELUM MASUKKAN PASSWORD -> GERBANG LOGIN
-if (!isset($_SESSION['site_unlocked'])):
-?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Masuk - Website Resmi Kelas XI G</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --red-primary: #800000;
-            --red-accent: #b30000;
-            --gold-primary: #D4AF37;
-            --gold-light: #F3E5AB;
-            --dark-bg: #0d0d0d;
-            --card-bg: #181818;
-        }
-
-        html { overflow-y: scroll; }
-
-        body {
-            background-color: var(--dark-bg);
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            background-image: 
-                radial-gradient(circle at center, rgba(128, 0, 0, 0.45) 0%, rgba(13, 13, 13, 0.98) 100%),
-                linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .registration-card {
-            background: var(--card-bg);
-            border: 2px solid var(--gold-primary);
-            border-radius: 12px;
-            padding: 35px;
-            position: relative;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9);
-            width: 390px;
-        }
-
-        .corner-ornament {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            border: 3px solid var(--gold-primary);
-            pointer-events: none;
-        }
-        .top-left { top: 8px; left: 8px; border-right: none; border-bottom: none; }
-        .top-right { top: 8px; right: 8px; border-left: none; border-bottom: none; }
-        .bottom-left { bottom: 8px; left: 8px; border-right: none; border-top: none; }
-        .bottom-right { bottom: 8px; right: 8px; border-left: none; border-top: none; }
-
-        .form-title h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-primary);
-            letter-spacing: 1.5px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-accent) 100%);
-            border: 2px solid var(--gold-primary);
-            color: var(--gold-light);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 6px;
-        }
-        .btn-submit:hover {
-            background: linear-gradient(135deg, var(--red-accent) 0%, #e60000 100%);
-            color: #ffffff;
-        }
-        .logo-iks { height: 95px; width: 95px; object-fit: contain; }
-    </style>
-</head>
-<body>
-
-    <div class="registration-card text-center">
-        <div class="corner-ornament top-left"></div>
-        <div class="corner-ornament top-right"></div>
-        <div class="corner-ornament bottom-left"></div>
-        <div class="corner-ornament bottom-right"></div>
-
-        <div class="mb-3">
-            <img src="<?= $logo_url; ?>" alt="Logo XI G" class="logo-iks mb-2" onerror="this.onerror=null; this.src='logo.png';">
-            
-            <div class="form-title">
-                <h3 class="fw-bold mb-0">PORTAL XI G</h3>
-                <small class="text-warning">THE GREATNESS CLASS</small>
-            </div>
-            <p class="text-light small mt-2 opacity-75">Masukkan password untuk membuka portal kelas</p>
-        </div>
-
-        <?php if ($error): ?>
-            <div class="alert alert-danger py-2 small text-center"><?= $error; ?></div>
-        <?php endif; ?>
-
-        <form method="POST">
-            <div class="mb-4 text-start">
-                <label class="form-label fw-semibold text-warning small">Password Akses</label>
-                <div class="input-group">
-                    <span class="input-group-text bg-dark border-warning text-warning"><i class="fa-solid fa-key"></i></span>
-                    <input type="password" name="site_password" class="form-control bg-dark text-white border-warning" placeholder="Masukkan password..." required>
-                </div>
-            </div>
-            <button type="submit" name="unlock_site" class="btn-submit">
-                <i class="fa-solid fa-lock-open me-2"></i> Buka Portal
-            </button>
-        </form>
-    </div>
-
-</body>
-</html>
-<?php 
-exit; 
-endif; 
-?>
 <!DOCTYPE html>
 <html lang="id" data-bs-theme="dark">
 <head>
@@ -188,7 +34,7 @@ endif;
             flex-direction: column;
         }
 
-        /* STYLING LOADING SCREEN */
+        /* LOADING SCREEN */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -252,6 +98,7 @@ endif;
             color: var(--gold-light) !important;
             font-weight: 600;
             font-size: 0.9rem;
+            cursor: pointer;
         }
 
         .hero-section {
@@ -318,9 +165,8 @@ endif;
     <!-- Header Navigation -->
     <header class="navbar navbar-expand-lg">
         <div class="container-fluid px-0">
-            <a class="navbar-brand d-flex align-items-center gap-3" href="#" onclick="switchPage('home')">
-                <img src="<?= $logo_url; ?>" alt="Logo XI G" class="logo-iks" onerror="this.onerror=null; this.src='logo.png';">
-                
+            <a class="navbar-brand d-flex align-items-center gap-3" href="javascript:void(0)" onclick="switchPage('home')">
+                <img src="logo.png" alt="Logo XI G" class="logo-iks" onerror="this.src='https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip';">
                 <div class="logo-text">
                     <h1>KELAS XI G</h1>
                     <small class="text-light opacity-75">MAN 1 Lamongan</small>
@@ -331,23 +177,12 @@ endif;
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center gap-2">
-                    <li class="nav-item"><a class="nav-link nav-btn active" id="nav-home" href="javascript:void(0)" onclick="switchPage('home')">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-profil" href="javascript:void(0)" onclick="switchPage('profil')">Profil</a></li>
-                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-struktur" href="javascript:void(0)" onclick="switchPage('struktur')">Struktur</a></li>
-                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-siswa" href="javascript:void(0)" onclick="switchPage('siswa')">Siswa</a></li>
-                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-jadwal" href="javascript:void(0)" onclick="switchPage('jadwal')">Jadwal</a></li>
-                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-piket" href="javascript:void(0)" onclick="switchPage('piket')">Piket</a></li>
-                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-galeri" href="javascript:void(0)" onclick="switchPage('galeri')">Galeri</a></li>
-                    <li class="nav-item ms-lg-2">
-                        <a href="dashboard.php" class="btn btn-gold btn-sm px-3 rounded-pill">
-                            <i class="fa-solid fa-gauge-high me-1"></i> Admin
-                        </a>
-                    </li>
-                    <li class="nav-item ms-lg-1">
-                        <a href="index.php?lock=true" class="btn btn-outline-danger btn-sm px-3 rounded-pill" title="Kunci Kembali">
-                            <i class="fa-solid fa-lock"></i>
-                        </a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link nav-btn active" id="nav-home" onclick="switchPage('home')">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-profil" onclick="switchPage('profil')">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-struktur" onclick="switchPage('struktur')">Struktur</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-jadwal" onclick="switchPage('jadwal')">Jadwal</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-piket" onclick="switchPage('piket')">Piket</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" id="nav-galeri" onclick="switchPage('galeri')">Galeri</a></li>
                 </ul>
             </div>
         </div>
@@ -358,8 +193,7 @@ endif;
         <!-- 1. BERANDA -->
         <div id="page-home" class="page-content active">
             <section class="hero-section rounded-4 my-3">
-                <img src="<?= $logo_url; ?>" alt="Logo XI G" class="logo-hero-iks mb-3" onerror="this.onerror=null; this.src='logo.png';">
-                
+                <img src="logo.png" alt="Logo XI G" class="logo-hero-iks mb-3" onerror="this.src='https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip';">
                 <h2 class="hero-title">THE GREATNESS CLASS</h2>
                 <div class="chinese-title">團結 • 創造力 • 卓越</div>
                 <p class="lead text-light opacity-75">"Solid, Kreatif, dan Berprestasi Tanpa Batas"</p>
@@ -372,13 +206,6 @@ endif;
             <div class="row g-4 mt-2">
                 <div class="col-md-3 col-sm-6">
                     <div class="info-card text-center">
-                        <i class="fa-solid fa-users fa-2x text-warning mb-2"></i>
-                        <h5 class="text-warning">Data Siswa</h5>
-                        <button onclick="switchPage('siswa')" class="btn btn-gold btn-sm rounded-pill w-100 mt-2">Buka →</button>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="info-card text-center">
                         <i class="fa-solid fa-calendar-days fa-2x text-danger mb-2"></i>
                         <h5 class="text-warning">Pelajaran</h5>
                         <button onclick="switchPage('jadwal')" class="btn btn-gold btn-sm rounded-pill w-100 mt-2">Buka →</button>
@@ -389,6 +216,13 @@ endif;
                         <i class="fa-solid fa-broom fa-2x text-success mb-2"></i>
                         <h5 class="text-warning">Jadwal Piket</h5>
                         <button onclick="switchPage('piket')" class="btn btn-gold btn-sm rounded-pill w-100 mt-2">Buka →</button>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="info-card text-center">
+                        <i class="fa-solid fa-user-tie fa-2x text-warning mb-2"></i>
+                        <h5 class="text-warning">Struktur</h5>
+                        <button onclick="switchPage('struktur')" class="btn btn-gold btn-sm rounded-pill w-100 mt-2">Buka →</button>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
@@ -418,150 +252,193 @@ endif;
             <div class="info-card my-4">
                 <h3 class="text-warning border-bottom border-danger pb-2 mb-4 text-center">Struktur Pengurus Kelas</h3>
                 <div class="row g-3 justify-content-center">
-                    <?php
-                    $pengurus = [
-                        ["Wali Kelas", "Bu Arini", "fa-user-tie"],
-                        ["Ketua Kelas", "Toriq", "fa-user-gear"],
-                        ["Sekretaris", "Cece", "fa-user-pen"]
-                    ];
-                    foreach ($pengurus as $p):
-                    ?>
                     <div class="col-md-4 col-sm-6 text-center">
                         <div class="p-4 bg-dark border border-warning rounded shadow">
-                            <i class="fa-solid <?= $p[2]; ?> fa-2x text-warning mb-2"></i>
-                            <h5 class="fw-bold text-white mb-2"><?= $p[1]; ?></h5>
-                            <span class="badge bg-danger px-3 py-1"><?= $p[0]; ?></span>
+                            <i class="fa-solid fa-user-tie fa-2x text-warning mb-2"></i>
+                            <h5 class="fw-bold text-white mb-2">Bu Arini</h5>
+                            <span class="badge bg-danger px-3 py-1">Wali Kelas</span>
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    <div class="col-md-4 col-sm-6 text-center">
+                        <div class="p-4 bg-dark border border-warning rounded shadow">
+                            <i class="fa-solid fa-user-gear fa-2x text-warning mb-2"></i>
+                            <h5 class="fw-bold text-white mb-2">Toriq</h5>
+                            <span class="badge bg-danger px-3 py-1">Ketua Kelas</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-center">
+                        <div class="p-4 bg-dark border border-warning rounded shadow">
+                            <i class="fa-solid fa-user-pen fa-2x text-warning mb-2"></i>
+                            <h5 class="fw-bold text-white mb-2">Cece</h5>
+                            <span class="badge bg-danger px-3 py-1">Sekretaris</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 4. SISWA -->
-        <div id="page-siswa" class="page-content">
-            <div class="info-card my-4">
-                <h3 class="text-warning border-bottom border-danger pb-2 mb-3">Data Siswa XI G</h3>
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover text-center align-middle border-secondary">
-                        <thead class="table-danger text-warning">
-                            <tr>
-                                <th>No</th>
-                                <th class="text-start">Nama Lengkap</th>
-                                <th>L/P</th>
-                                <th>Hobi</th>
-                                <th>Cita-cita</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $query = mysqli_query($conn, "SELECT * FROM siswa ORDER BY absen ASC");
-                            if ($query && mysqli_num_rows($query) > 0) {
-                                while ($row = mysqli_fetch_assoc($query)) {
-                                    echo "<tr>
-                                        <td>{$row['absen']}</td>
-                                        <td class='text-start fw-semibold'>{$row['nama']}</td>
-                                        <td><span class='badge bg-secondary'>{$row['jenis_kelamin']}</span></td>
-                                        <td>{$row['hobi']}</td>
-                                        <td><span class='badge bg-warning text-dark'>{$row['cita_cita']}</span></td>
-                                    </tr>";
-                                }
-                            } else {
-                                echo "<tr><td colspan='5' class='text-muted py-3'>Belum ada data siswa di database.</td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. JADWAL PELAJARAN -->
+        <!-- 4. JADWAL PELAJARAN -->
         <div id="page-jadwal" class="page-content">
             <div class="info-card my-4">
                 <h3 class="text-warning border-bottom border-danger pb-2 mb-4 text-center"><i class="fa-solid fa-calendar-days me-2"></i>Jadwal Pelajaran XI G</h3>
                 <div class="row g-3">
-                    <?php
-                    $jadwal_baru = [
-                        "Senin" => ["Kimia", "Fiqih", "MTK TL", "B. Inggris"],
-                        "Selasa" => ["Geografi", "PKN", "Fisika", "Aqidah", "Senbud"],
-                        "Rabu" => ["Biologi", "Informatika", "PJOK", "MTK TL", "B. Arab", "Fisika"],
-                        "Kamis" => ["BK", "Al-Quran Hadist", "B. Indonesia", "Sejarah Indonesia", "MTK", "Tahfidz"],
-                        "Jumat" => ["Kimia", "SKI", "Geografi", "Prakarya"],
-                        "Sabtu" => ["LIBURRR!!"]
-                    ];
-
-                    foreach ($jadwal_baru as $hari => $mapel):
-                    ?>
                     <div class="col-md-4 col-sm-6">
                         <div class="p-3 bg-dark border border-warning rounded h-100">
-                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3"><?= $hari; ?></h5>
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Senin</h5>
                             <ul class="list-unstyled ps-2 mb-0">
-                                <?php foreach ($mapel as $m): ?>
-                                    <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i><?= $m; ?></li>
-                                <?php endforeach; ?>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Kimia</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Fiqih</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK TL</li>
+                                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Inggris</li>
                             </ul>
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Selasa</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Geografi</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>PKN</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Fisika</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Aqidah</li>
+                                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Senbud</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Rabu</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Biologi</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Informatika</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>PJOK</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK TL</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Arab</li>
+                                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Fisika</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Kamis</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>BK</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Al-Quran Hadist</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Indonesia</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Sejarah Indonesia</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK</li>
+                                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Tahfidz</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Jumat</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Kimia</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>SKI</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Geografi</li>
+                                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Prakarya</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100 text-center d-flex flex-column justify-content-center">
+                            <h5 class="text-danger fw-bold border-bottom border-secondary pb-2 mb-3">Sabtu</h5>
+                            <h4 class="text-warning fw-bold my-3">LIBURRR!! 🎉</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 6. JADWAL PIKET KELAS -->
+        <!-- 5. JADWAL PIKET KELAS -->
         <div id="page-piket" class="page-content">
             <div class="info-card my-4">
                 <h3 class="text-warning border-bottom border-danger pb-2 mb-4 text-center"><i class="fa-solid fa-broom me-2"></i>Jadwal Piket Kelas XI G</h3>
                 <div class="row g-3">
-                    <?php
-                    $piket_data = [
-                        "Senin" => ["Sifa", "Akbar", "Dian", "Najwa", "Aro", "Jannah", "Thoriq"],
-                        "Selasa" => ["Faiz", "Rafa", "Humayroh", "Leni", "Melvin", "Arsa", "Hanafi", "Reyhana"],
-                        "Rabu" => ["Abiyyu", "Zio", "Bagas", "Olik", "Sindi", "Cece", "Leny"],
-                        "Kamis" => ["Haidar", "Ajeng", "Farid", "Cila", "Alifiyah", "Giya", "Daffa"],
-                        "Jum'at" => ["Riza", "Ferdi", "Rahma", "Fajrul", "Ubed", "Yusuf", "Humam", "Nisa"]
-                    ];
-
-                    foreach ($piket_data as $hari => $anggota):
-                    ?>
                     <div class="col-md-4 col-sm-6">
                         <div class="p-3 bg-dark border border-warning rounded h-100">
-                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3"><?= $hari; ?></h5>
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Senin</h5>
                             <ul class="list-unstyled ps-2 mb-0">
-                                <?php foreach ($anggota as $nama): ?>
-                                    <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i><?= $nama; ?></li>
-                                <?php endforeach; ?>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Sifa</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Akbar</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Dian</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Najwa</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Aro</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Jannah</li>
+                                <li class="py-1"><i class="fa-solid fa-check text-warning me-2 small"></i>Thoriq</li>
                             </ul>
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Selasa</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Faiz</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Rafa</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Humayroh</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Leni</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Melvin</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Arsa</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Hanafi</li>
+                                <li class="py-1"><i class="fa-solid fa-check text-warning me-2 small"></i>Reyhana</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Rabu</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Abiyyu</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Zio</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Bagas</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Olik</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Sindi</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Cece</li>
+                                <li class="py-1"><i class="fa-solid fa-check text-warning me-2 small"></i>Leny</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Kamis</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Haidar</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Ajeng</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Farid</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Cila</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Alifiyah</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Giya</li>
+                                <li class="py-1"><i class="fa-solid fa-check text-warning me-2 small"></i>Daffa</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 bg-dark border border-warning rounded h-100">
+                            <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Jum'at</h5>
+                            <ul class="list-unstyled ps-2 mb-0">
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Riza</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Ferdi</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Rahma</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Fajrul</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Ubed</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Yusuf</li>
+                                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-check text-warning me-2 small"></i>Humam</li>
+                                <li class="py-1"><i class="fa-solid fa-check text-warning me-2 small"></i>Nisa</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 7. GALERI -->
+        <!-- 6. GALERI -->
         <div id="page-galeri" class="page-content">
             <div class="info-card my-4">
                 <h3 class="text-warning border-bottom border-danger pb-2 mb-3">Galeri Foto Kelas</h3>
-                <div class="row g-3">
-                    <?php
-                    $galeri = mysqli_query($conn, "SELECT * FROM galeri");
-                    if ($galeri && mysqli_num_rows($galeri) > 0) {
-                        while ($g = mysqli_fetch_assoc($galeri)) {
-                            echo '<div class="col-md-4 col-sm-6">
-                                <div class="bg-dark border border-warning rounded overflow-hidden">
-                                    <img src="' . $g['gambar'] . '" class="card-img-top" style="height: 180px; object-fit: cover;" alt="Galeri">
-                                    <div class="p-2 text-center">
-                                        <span class="badge bg-danger mb-1">' . $g['kategori'] . '</span>
-                                        <p class="small text-muted mb-0">' . $g['deskripsi'] . '</p>
-                                    </div>
-                                </div>
-                            </div>';
-                        }
-                    } else {
-                        echo '<div class="col-12 text-center text-muted py-3">Belum ada foto galeri.</div>';
-                    }
-                    ?>
+                <div class="text-center text-muted py-4">
+                    <p>Dokumentasi keseruan dan momen kebersamaan Kelas XI G.</p>
                 </div>
             </div>
         </div>
@@ -574,16 +451,14 @@ endif;
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Sembunyikan loading screen setelah halaman siap
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const loader = document.getElementById('loading-screen');
                 loader.classList.add('fade-out');
-            }, 400); // jeda sesaat agar mulus
+            }, 400);
         });
 
         function switchPage(pageId) {
-            // Tampilkan loading sebentar saat ganti menu
             const loader = document.getElementById('loading-screen');
             loader.classList.remove('fade-out');
 
@@ -605,8 +480,6 @@ endif;
                 }
 
                 window.scrollTo({ top: 0, behavior: 'auto' });
-
-                // Hilangkan kembali loading screen
                 loader.classList.add('fade-out');
             }, 300);
         }

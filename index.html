@@ -57,29 +57,91 @@
             visibility: hidden;
         }
 
-        .spinner-ring {
-            width: 75px;
-            height: 75px;
-            border: 4px solid rgba(212, 175, 55, 0.2);
-            border-top: 4px solid var(--gold-primary);
+        /* ANIMASI LOADING SCREEN */
+        .loading-animation-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dragon-scale {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            border: 4px solid transparent;
+            border-top-color: var(--gold-primary);
+            border-bottom-color: var(--gold-primary);
+            animation: dragonPulse 2s linear infinite;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .dragon-scale:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            border-top-color: var(--red-accent);
+            border-bottom-color: var(--red-accent);
+            animation: dragonPulse 2s linear infinite 0.5s;
         }
 
+        .dragon-scale:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            border-top-color: var(--gold-light);
+            border-bottom-color: var(--gold-light);
+            animation: dragonPulse 2s linear infinite 1s;
+        }
+
+        .greatness-text-anim {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-primary);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            position: absolute;
+            animation: greatnessPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dragonPulse {
+            0% {
+                transform: rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes greatnessPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+                text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(212, 175, 55, 1), 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* TOP BANNER */
         .top-banner {
             background: linear-gradient(90deg, #500000, #800000, #500000);
             color: var(--gold-light);
             text-align: center;
-            padding: 6px;
+            padding: 8px;
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             border-bottom: 1px solid var(--gold-primary);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         header {
@@ -174,13 +236,19 @@
 
     <!-- LOADING SCREEN -->
     <div id="loading-screen">
-        <div class="spinner-ring mb-3"></div>
-        <h4 style="font-family: 'Cinzel', serif; color: var(--gold-primary); letter-spacing: 2px;">THE GREATNESS CLASS</h4>
-        <p class="text-light small opacity-75">Memuat Halaman...</p>
+        <div class="loading-animation-container mb-4">
+            <div class="dragon-scale"></div>
+            <div class="dragon-scale"></div>
+            <div class="dragon-scale"></div>
+            <div class="greatness-text-anim">XI G</div>
+        </div>
+        <h4 style="font-family: 'Cinzel', serif; color: var(--gold-primary); letter-spacing: 2px; text-align: center; margin-bottom: 5px;">THE GREATNESS CLASS</h4>
+        <p class="text-light small opacity-75" style="text-align: center;">Memuat Keagungan...</p>
     </div>
 
+    <!-- TOP BANNER -->
     <div class="top-banner">
-        🐉 PORTAL RESMI KELAS XI G - THE GREATNESS CLASS 🐉
+        👑 WELCOME TO THE CLASS - KELAS XI G 👑
     </div>
 
     <!-- Header Navigation -->
@@ -471,7 +539,7 @@
             </div>
         </div>
 
-        <!-- 7. FAQ (PERTANYAAN UMUM) -->
+        <!-- 7. FAQ -->
         <div id="page-faq" class="page-content">
             <div class="info-card my-4">
                 <h3 class="text-warning border-bottom border-danger pb-2 mb-4 text-center">
@@ -479,7 +547,6 @@
                 </h3>
                 
                 <div class="accordion accordion-flush" id="accordionFAQ">
-                    <!-- Pertanyaan 1 -->
                     <div class="accordion-item bg-dark text-light border border-secondary mb-2 rounded">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed bg-dark text-warning fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
@@ -493,7 +560,6 @@
                         </div>
                     </div>
 
-                    <!-- Pertanyaan 2 -->
                     <div class="accordion-item bg-dark text-light border border-secondary mb-2 rounded">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed bg-dark text-warning fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
@@ -507,7 +573,6 @@
                         </div>
                     </div>
 
-                    <!-- Pertanyaan 3 -->
                     <div class="accordion-item bg-dark text-light border border-secondary mb-2 rounded">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed bg-dark text-warning fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
@@ -531,7 +596,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Fitur Jam Digital Real-time
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -547,26 +611,25 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Loading Screen
         window.addEventListener('load', function() {
             setTimeout(function() {
                 const loader = document.getElementById('loading-screen');
-                loader.classList.add('fade-out');
-            }, 400);
+                if (loader) {
+                    loader.classList.add('fade-out');
+                }
+            }, 500);
         });
 
-        // Navigasi SPA
         function switchPage(pageId) {
             const loader = document.getElementById('loading-screen');
             
-            // Otomatis menutup dropdown navbar jika sedang terbuka di tampilan mobile (garis 3)
             const navbarCollapse = document.getElementById('navbarNav');
             if (navbarCollapse && navbarCollapse.classList.contains('show')) {
                 const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
                 bsCollapse.hide();
             }
 
-            loader.classList.remove('fade-out');
+            if (loader) loader.classList.remove('fade-out');
             setTimeout(function() {
                 const pages = document.querySelectorAll('.page-content');
                 pages.forEach(page => page.classList.remove('active'));
@@ -585,7 +648,7 @@
                 }
                 
                 window.scrollTo({ top: 0, behavior: 'auto' });
-                loader.classList.add('fade-out');
+                if (loader) loader.classList.add('fade-out');
             }, 300);
         }
     </script>

@@ -139,10 +139,9 @@
     }
 
     header {
-      background: linear-gradient(180deg, rgba(30, 0, 60, 0.95) 0%, rgba(10, 8, 20, 0.98) 100%); /* Dark purple to very dark blue */
+      background: linear-gradient(180deg, rgba(30, 0, 60, 0.95) 0%, rgba(10, 8, 20, 0.98) 100%);
       border-bottom: 3px solid var(--gold-primary);
-      padding: 12px 5%;
-      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);      
     }
 
     .logo-iks { width: 50px; height: 50px; object-fit: contain; }
@@ -248,7 +247,8 @@
       25% { transform: translateY(-30px) translateX(20px) rotate(10deg); }
       50% { transform: translateY(0px) translateX(40px) rotate(0deg); }
       75% { transform: translateY(30px) translateX(20px) rotate(-10deg); }
-      100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      75% { transform: translateY(30px) translateX(20px) rotate(-20deg); } /* Berputar 20 derajat berlawanan arah jarum jam */
+      100% { transform: translateY(0px) translateX(0px) rotate(0deg); } /* Kembali ke posisi awal */
     }
   </style>
 </head>
@@ -277,8 +277,8 @@
   </div>
 
   <!-- HEADER NAVIGATION -->
-  <header class="navbar navbar-expand-lg">
-    <div class="container-fluid px-0">
+  <header class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-3" href="javascript:void(0)" onclick="switchPage('home')">
         <img src="logo.png" alt="Logo XI G" class="logo-iks" onerror="this.src='https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip';">
         <div class="logo-text">
@@ -306,6 +306,7 @@
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-piket" onclick="switchPage('piket')">Piket</a></li>
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-galeri" onclick="switchPage('galeri')">Galeri</a></li>
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-faq" onclick="switchPage('faq')">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="uang kas kelas xig.html" target="_blank" style="color: #ffc107 !important; font-weight: bold;">Uang Kas</a></li>
         </ul>
       </div>
     </div>

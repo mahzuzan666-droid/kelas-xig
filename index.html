@@ -198,6 +198,17 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     }
 
+    /* Gaya khusus untuk tabel dashboard */
+    #page-dashboard .table {
+        --bs-table-bg: transparent;
+        --bs-table-border-color: rgba(212, 175, 55, 0.3);
+        --bs-table-striped-bg: rgba(212, 175, 55, 0.05);
+    }
+    #page-dashboard .modal-content {
+        background: var(--card-bg);
+        border: 1px solid var(--gold-primary);
+    }
+
     .btn-gold {
       background: linear-gradient(135deg, #330066 0%, #5500aa 100%); /* Dark purple gradient */
       border: 1px solid var(--gold-primary);
@@ -765,6 +776,7 @@
         </form>
         <div class="text-center mt-4">
           <a href="./Absensi_XIG/dashboard.html" target="_blank" class="btn btn-outline-warning btn-sm">Lihat Rekap Absensi &rarr;</a>
+          <a href="javascript:void(0)" onclick="bukaDashboard()" class="btn btn-outline-warning btn-sm">Lihat Rekap Absensi &rarr;</a>
         </div>
       </div>
     </div>
@@ -805,6 +817,85 @@
       </div>
     </div>
   </main>
+
+    <!-- =============================================== -->
+    <!-- HALAMAN DASHBOARD ABSENSI (TERSEMBUNYI/MODAL) -->
+    <!-- =============================================== -->
+    <div id="page-dashboard" class="page-content">
+      <div class="info-card my-4">
+          <div class="text-center mb-4">
+              <h1 class="text-warning" style="font-family: 'Cinzel', serif;">Dashboard Rekap Absensi</h1>
+              <p class="text-light opacity-75">Kelas XI G</p>
+          </div>
+
+          <!-- Kartu Ringkasan -->
+          <div class="row g-3 mb-4">
+              <div class="col-md-3 col-6">
+                  <div class="p-3 bg-dark border border-secondary rounded text-center">
+                      <p class="small text-light opacity-75 mb-1">Total Data</p>
+                      <h2 id="totData" class="fw-bold text-white">0</h2>
+                  </div>
+              </div>
+              <div class="col-md-3 col-6">
+                  <div class="p-3 bg-dark border border-secondary rounded text-center">
+                      <p class="small text-light opacity-75 mb-1">Hadir</p>
+                      <h2 id="totHadir" class="fw-bold text-success">0</h2>
+                  </div>
+              </div>
+              <div class="col-md-3 col-6">
+                  <div class="p-3 bg-dark border border-secondary rounded text-center">
+                      <p class="small text-light opacity-75 mb-1">Izin</p>
+                      <h2 id="totIzin" class="fw-bold text-warning">0</h2>
+                  </div>
+              </div>
+              <div class="col-md-3 col-6">
+                  <div class="p-3 bg-dark border border-secondary rounded text-center">
+                      <p class="small text-light opacity-75 mb-1">Sakit</p>
+                      <h2 id="totSakit" class="fw-bold text-danger">0</h2>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Tabel Data -->
+          <div class="mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h3 class="text-warning h5">Riwayat Kehadiran</h3>
+                  <button onclick="hapusDataAbsensi()" class="btn btn-sm btn-outline-danger">
+                      <i class="fa-solid fa-trash me-1"></i> Bersihkan Data
+                  </button>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                      <thead>
+                          <tr>
+                              <th>No</th>
+                              <th>Nama Siswa</th>
+                              <th>Tanggal</th>
+                              <th>Waktu</th>
+                              <th>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody id="tabelData">
+                          <!-- Data diisi oleh JS -->
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Modal Proteksi Kata Sandi untuk Dashboard -->
+    <div class="modal fade" id="password-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4">
+                    <h2 class="text-2xl fw-bold text-warning mb-2" style="font-family: 'Cinzel', serif;">Akses Terproteksi</h2>
+                    <p class="text-light opacity-75 mb-4">Masukkan kata sandi untuk membuka dashboard.</p>
+                    <form id="password-form"><div class="mb-3"><input type="password" id="password-input" placeholder="••••••••" class="form-control form-control-lg text-center"></div><button type="submit" class="btn btn-gold w-100 btn-lg">Buka Dashboard</button><p id="error-message" class="text-danger small mt-3" style="display: none;">Kata sandi salah! Akses ditolak.</p></form>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <!-- MODAL LIGHTBOX -->
   <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">

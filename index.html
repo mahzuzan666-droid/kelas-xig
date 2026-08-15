@@ -703,6 +703,71 @@
       </div>
     </div>
 
+    <!-- DAFTAR SISWA -->
+    <div id="page-siswa" class="page-content">
+      <div class="info-card my-4">
+        <h3 class="text-warning border-bottom border-danger pb-2 mb-3 text-center">
+          <i class="fa-solid fa-users me-2"></i>Daftar Siswa Kelas XI G
+        </h3>
+        <p class="text-center text-light opacity-75 mb-4">Berikut adalah daftar lengkap siswa-siswi MAN 1 Lamongan Kelas XI G.</p>
+
+        <!-- Fitur Pencarian Siswa -->
+        <div class="mb-4">
+          <input type="text" id="searchSiswaInput" class="form-control" placeholder="🔍 Cari nama siswa...">
+        </div>
+
+        <!-- Tabel Daftar Siswa -->
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th style="width: 10%;">No.</th>
+                <th>Nama Lengkap</th>
+              </tr>
+            </thead>
+            <tbody id="daftarSiswaTable">
+              <tr><td>1</td><td>ABIYYU SOFYAN</td></tr>
+              <tr><td>2</td><td>AHMAD DAFFA ALIIFUDIN</td></tr>
+              <tr><td>3</td><td>AISYAH RAHMATUL KHUSNA</td></tr>
+              <tr><td>4</td><td>AL HAIDAR ALLYZATI SATRIA UTAMA</td></tr>
+              <tr><td>5</td><td>ALIFIA ANAZWA MA'RIFAH</td></tr>
+              <tr><td>6</td><td>ARSA NABIHA MAHESWARA</td></tr>
+              <tr><td>7</td><td>ASMAUL HUSNIATI AULIYAH</td></tr>
+              <tr><td>8</td><td>BAGAS OKTA MAULANA ALGHIVANIE</td></tr>
+              <tr><td>9</td><td>DIANING FITHRIYYAH</td></tr>
+              <tr><td>10</td><td>FAJRUL RIZKY PRATAMA</td></tr>
+              <tr><td>11</td><td>FERDHIAN ZAIDHAN PUTRA ANDREAF</td></tr>
+              <tr><td>12</td><td>HUMAIRA' SYIFA ASHLAHAH</td></tr>
+              <tr><td>13</td><td>ITSNA MEHRUNISA IFFAT</td></tr>
+              <tr><td>14</td><td>JANNATUL FIRDAUSI NUZULA</td></tr>
+              <tr><td>15</td><td>MAHZUZAN JULIANO ADIPTYA</td></tr>
+              <tr><td>16</td><td>MOCH. FERDIANSYAH</td></tr>
+              <tr><td>17</td><td>MOCHAMAD HANAFI NUR ALAMSYAH</td></tr>
+              <tr><td>18</td><td>MOCHAMMAD FADLI AL-FARID FAIZAL</td></tr>
+              <tr><td>19</td><td>MOH. FARHAN ALAKBAR</td></tr>
+              <tr><td>20</td><td>MOH. FARIS HUMAM</td></tr>
+              <tr><td>21</td><td>MOH. SHOLAHUDDIN RIZA</td></tr>
+              <tr><td>22</td><td>MUCHAMMAD YUSUF FITRIANSYAH</td></tr>
+              <tr><td>23</td><td>MUHAMMAD AIMAN ABDURROZIQ</td></tr>
+              <tr><td>24</td><td>MUHAMMAD FAIZ AL FAHRIZI</td></tr>
+              <tr><td>25</td><td>MUHAMMAD MELVIN MAULANA</td></tr>
+              <tr><td>26</td><td>MUHAMMAD SYAFIYYUL 'AINUN THORIQ</td></tr>
+              <tr><td>27</td><td>MUHAMMAD RAFA DINILLAH</td></tr>
+              <tr><td>28</td><td>MUHAMMAD UBAIDILLAH RIZQI</td></tr>
+              <tr><td>29</td><td>NAJWA AIRA NURHAYATI</td></tr>
+              <tr><td>30</td><td>NAZILA ZALFA</td></tr>
+              <tr><td>31</td><td>PUTRI LAILENY RANIAH</td></tr>
+              <tr><td>32</td><td>QIEA AYU SAHARA</td></tr>
+              <tr><td>33</td><td>RAHMA AJENG FITRIYATI</td></tr>
+              <tr><td>34</td><td>REYHANNA HILALLYAH</td></tr>
+              <tr><td>35</td><td>SHINDY AMALIA EKA LESTARI</td></tr>
+              <tr><td>36</td><td>SHITA DWI ARIFA UTAMI</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <!-- 8. ABSENSI -->
     <div id="page-absen" class="page-content">
       <div class="info-card my-4">
@@ -772,6 +837,13 @@
             </div>
           </div>
 
+          <!-- Kolom Upload Bukti Izin (tersembunyi) -->
+          <div id="buktiIzinContainer" class="mt-3" style="display: none;">
+            <label for="buktiIzin" class="form-label">Upload Bukti Izin (Foto Surat)</label>
+            <input type="file" id="buktiIzin" class="form-control" accept="image/*">
+            <small class="form-text text-light opacity-75">Wajib mengunggah foto jika memilih izin.</small>
+          </div>
+
           <button type="submit" class="btn btn-gold w-100 mt-3">Kirim Absen</button>
         </form>
         <div class="text-center mt-4">
@@ -833,6 +905,7 @@
                               <th>Tanggal</th>
                               <th>Waktu</th>
                               <th>Status</th>
+                              <th>Bukti</th>
                           </tr>
                       </thead>
                       <tbody id="tabelData">
@@ -1082,6 +1155,24 @@
       });
     }
 
+    // --- LOGIKA UNTUK PENCARIAN SISWA ---
+    const searchInput = document.getElementById('searchSiswaInput');
+    if (searchInput) {
+      searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toUpperCase();
+        const table = document.getElementById('daftarSiswaTable');
+        const tr = table.getElementsByTagName('tr');
+
+        for (let i = 0; i < tr.length; i++) {
+          let td = tr[i].getElementsByTagName('td')[1]; // Kolom nama
+          if (td) {
+            let txtValue = td.textContent || td.innerText;
+            tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+          }
+        }
+      });
+    }
+
     // --- LOGIKA UNTUK ABSENSI & DASHBOARD ---
 
     // 1. Logika Halaman Absensi
@@ -1103,22 +1194,53 @@
     const formAbsen = document.getElementById('formAbsen');
     if(formAbsen) {
       formAbsen.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const nama = document.getElementById('namaSiswa').value;
-          const tanggal = document.getElementById('tanggal-absen').value;
-          const waktu = new Date().toLocaleTimeString('id-ID');
-          const status = document.querySelector('input[name="status"]:checked').value;
+        e.preventDefault();
+        
+        const nama = document.getElementById('namaSiswa').value;
+        const tanggal = document.getElementById('tanggal-absen').value;
+        const waktu = new Date().toLocaleTimeString('id-ID');
+        const status = document.querySelector('input[name="status"]:checked').value;
+        const buktiFile = document.getElementById('buktiIzin').files[0];
 
-          let dataAbsen = JSON.parse(localStorage.getItem('absensi_xi_g')) || [];
-          dataAbsen.push({ nama, tanggal, waktu, status });
-          localStorage.setItem('absensi_xi_g', JSON.stringify(dataAbsen));
+        const simpanData = (data) => {
+            let dataAbsen = JSON.parse(localStorage.getItem('absensi_xi_g')) || [];
+            dataAbsen.push(data);
+            localStorage.setItem('absensi_xi_g', JSON.stringify(dataAbsen));
 
-          Swal.fire({
-              title: 'Berhasil!',
-              text: 'Terima kasih, absen kamu telah tercatat.',
-              icon: 'success',
-          }).then(() => { this.reset(); });
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Terima kasih, absen kamu telah tercatat.',
+                icon: 'success',
+            }).then(() => { 
+                this.reset(); 
+                document.getElementById('buktiIzinContainer').style.display = 'none';
+            });
+        };
+
+        if (status === 'Izin' && buktiFile) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                simpanData({ nama, tanggal, waktu, status, bukti: event.target.result });
+            };
+            reader.readAsDataURL(buktiFile);
+        } else {
+            simpanData({ nama, tanggal, waktu, status, bukti: null });
+        }
+      });
+
+      // Menampilkan/menyembunyikan input file bukti
+      document.querySelectorAll('input[name="status"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          const buktiContainer = document.getElementById('buktiIzinContainer');
+          const buktiInput = document.getElementById('buktiIzin');
+          if (this.value === 'Izin') {
+            buktiContainer.style.display = 'block';
+            buktiInput.required = true;
+          } else {
+            buktiContainer.style.display = 'none';
+            buktiInput.required = false;
+          }
+        });
       });
     }
 
@@ -1164,7 +1286,9 @@
         dataAbsen.forEach((data, index) => {
             if(data.status === 'Hadir') hadir++; else if(data.status === 'Izin') izin++; else sakit++;
             let warnaBadge = data.status === 'Hadir' ? 'text-bg-success' : (data.status === 'Izin' ? 'text-bg-warning' : 'text-bg-danger');
-            tabel.innerHTML += `<tr><td>${index + 1}</td><td class="fw-bold">${data.nama}</td><td>${data.tanggal}</td><td>${data.waktu}</td><td><span class="badge ${warnaBadge}">${data.status}</span></td></tr>`;
+            let buktiLink = data.bukti ? `<a href="${data.bukti}" target="_blank" class="btn btn-sm btn-outline-info">Lihat</a>` : '-';
+            
+            tabel.innerHTML += `<tr><td>${index + 1}</td><td class="fw-bold">${data.nama}</td><td>${data.tanggal}</td><td>${data.waktu}</td><td><span class="badge ${warnaBadge}">${data.status}</span></td><td>${buktiLink}</td></tr>`;
         });
 
         document.getElementById('totData').innerText = dataAbsen.length;

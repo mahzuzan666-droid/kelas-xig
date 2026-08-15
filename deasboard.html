@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - XI G</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <div id="main-content" class="max-w-6xl mx-auto" style="display: none;">
+        <!-- Header Dashboard -->
+        <div class="flex justify-between items-center mb-8 bg-white p-6 rounded-xl shadow-sm">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Dashboard Rekap Absensi</h1>
+                <p class="text-gray-500">Kelas XI G - Hari ini</p>
+            </div>
+            <a href="index.html" class="text-blue-600 hover:underline font-medium">&larr; Ke Halaman Absen</a>
+        </div>
+
+        <!-- Kartu Ringkasan (Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <p class="text-sm text-gray-500 font-semibold uppercase">Total Masuk Data</p>
+                <h2 id="totData" class="text-3xl font-bold text-gray-800 mt-2">0</h2>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                <p class="text-sm text-gray-500 font-semibold uppercase">Hadir</p>
+                <h2 id="totHadir" class="text-3xl font-bold text-green-600 mt-2">0</h2>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
+                <p class="text-sm text-gray-500 font-semibold uppercase">Izin</p>
+                <h2 id="totIzin" class="text-3xl font-bold text-yellow-600 mt-2">0</h2>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
+                <p class="text-sm text-gray-500 font-semibold uppercase">Sakit</p>
+                <h2 id="totSakit" class="text-3xl font-bold text-red-600 mt-2">0</h2>
+            </div>
+        </div>
+
+        <!-- Tabel Data -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-800">Riwayat Kehadiran</h3>
+                <button onclick="hapusData()" class="text-sm bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 transition">Bersihkan Data</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-600 text-sm border-b">
+                            <th class="p-4 font-medium">No</th>
+                            <th class="p-4 font-medium">Nama Siswa</th>
+                            <th class="p-4 font-medium">Tanggal</th>
+                            <th class="p-4 font-medium">Waktu Absen</th>
+                            <th class="p-4 font-medium">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelData" class="text-sm text-gray-700">
+                        <!-- Data akan dimuat dengan JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Protection Modal -->
+    <div id="password-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm transform transition-all" style="transform: scale(0.95); opacity: 0;">
+            <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Akses Terproteksi</h2>
+            <p class="text-center text-gray-500 mb-6">Silakan masukkan kata sandi untuk membuka dashboard.</p>
+            <form id="password-form">
+                <div class="mb-4">
+                    <label for="password-input" class="sr-only">Kata Sandi</label>
+                    <input type="password" id="password-input" placeholder="••••••••" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow-lg transition">
+                    Buka Dashboard
+                </button>
+                <p id="error-message" class="text-red-500 text-sm text-center mt-4" style="display: none;">Kata sandi salah! Akses ditolak.</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- FUNGSI PROTEKSI KATA SANDI ---
+        window.onload = function() {
+            const KATA_SANDI_RAHASIA = "rajinbelajar";
+            const modal = document.getElementById('password-modal');
+            const modalBox = modal.querySelector('div');
+            const passwordForm = document.getElementById('password-form');
+            const passwordInput = document.getElementById('password-input');
+            const errorMessage = document.getElementById('error-message');
+
+            // Tampilkan modal dengan animasi
+            setTimeout(() => {
+                modalBox.style.transform = 'scale(1)';
+                modalBox.style.opacity = '1';
+            }, 50);
+
+            passwordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (passwordInput.value === KATA_SANDI_RAHASIA) {
+                    // Jika kata sandi benar
+                    modal.style.display = 'none'; // Sembunyikan modal
+                    document.body.classList.remove('bg-gray-100');
+                    document.body.classList.add('bg-gray-50', 'p-6');
+                    document.getElementById('main-content').style.display = 'block';
+                    muatData(); // Muat data dashboard
+                } else {
+                    // Jika kata sandi salah
+                    errorMessage.style.display = 'block';
+                    passwordInput.focus();
+                    // Goyangkan modal box
+                    modalBox.animate([
+                        { transform: 'translateX(-10px)' },
+                        { transform: 'translateX(10px)' },
+                        { transform: 'translateX(-5px)' },
+                        { transform: 'translateX(5px)' },
+                        { transform: 'translateX(0px)' }
+                    ], {
+                        duration: 300,
+                        easing: 'ease-in-out'
+                    });
+                }
+            });
+        };
+
+
+        // --- FUNGSI UTAMA DASHBOARD ---
+        function muatData() {
+            const dataAbsen = JSON.parse(localStorage.getItem('absensi_xi_g')) || [];
+            const tabel = document.getElementById('tabelData');
+            
+            let html = '';
+            let hadir = 0, izin = 0, sakit = 0;
+
+            if (dataAbsen.length === 0) {
+                tabel.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">Belum ada data absensi.</td></tr>';
+                return;
+            }
+
+            dataAbsen.forEach((data, index) => {
+                // Hitung statistik
+                if(data.status === 'Hadir') hadir++;
+                else if(data.status === 'Izin') izin++;
+                else if(data.status === 'Sakit') sakit++;
+
+                // Menentukan warna badge status
+                let warnaBadge = '';
+                if(data.status === 'Hadir') warnaBadge = 'bg-green-100 text-green-700';
+                else if(data.status === 'Izin') warnaBadge = 'bg-yellow-100 text-yellow-700';
+                else if(data.status === 'Sakit') warnaBadge = 'bg-red-100 text-red-700';
+
+                html += `
+                    <tr class="border-b hover:bg-gray-50 transition">
+                        <td class="p-4">${index + 1}</td>
+                        <td class="p-4 font-medium">${data.nama}</td>
+                        <td class="p-4">${data.tanggal}</td>
+                        <td class="p-4">${data.waktu}</td>
+                        <td class="p-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${warnaBadge}">${data.status}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tabel.innerHTML = html;
+            
+            // Update Card
+            document.getElementById('totData').innerText = dataAbsen.length;
+            document.getElementById('totHadir').innerText = hadir;
+            document.getElementById('totIzin').innerText = izin;
+            document.getElementById('totSakit').innerText = sakit;
+        }
+
+    </script>
+</body>
+</html>

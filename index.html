@@ -852,71 +852,6 @@
       </div>
     </div>
 
-    <!-- 9. DASHBOARD (TERSEMBUNYI) -->
-    <div id="page-dashboard" class="page-content">
-      <div class="info-card my-4">
-          <div class="text-center mb-4">
-              <h1 class="text-warning" style="font-family: 'Cinzel', serif;">Dashboard Rekap Absensi</h1>
-              <p class="text-light opacity-75">Kelas XI G</p>
-          </div>
-
-          <!-- Kartu Ringkasan -->
-          <div class="row g-3 mb-4">
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Total Data</p>
-                      <h2 id="totData" class="fw-bold text-white">0</h2>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Hadir</p>
-                      <h2 id="totHadir" class="fw-bold text-success">0</h2>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Izin</p>
-                      <h2 id="totIzin" class="fw-bold text-warning">0</h2>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Sakit</p>
-                      <h2 id="totSakit" class="fw-bold text-danger">0</h2>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Tabel Data -->
-          <div class="mt-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h3 class="text-warning h5">Riwayat Kehadiran</h3>
-                  <button onclick="hapusDataAbsensi()" class="btn btn-sm btn-outline-danger">
-                      <i class="fa-solid fa-trash me-1"></i> Bersihkan Data
-                  </button>
-              </div>
-              <div class="table-responsive">
-                  <table class="table table-striped table-hover">
-                      <thead>
-                          <tr>
-                              <th>No</th>
-                              <th>Nama Siswa</th>
-                              <th>Tanggal</th>
-                              <th>Waktu</th>
-                              <th>Status</th>
-                              <th>Bukti</th>
-                          </tr>
-                      </thead>
-                      <tbody id="tabelData">
-                          <!-- Data diisi oleh JS -->
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-    </div>
-
     <!-- 7. FAQ -->
     <div id="page-faq" class="page-content">
       <div class="info-card my-4">
@@ -954,84 +889,75 @@
     </div>
   </main>
 
-    <!-- =============================================== -->
-    <!-- HALAMAN DASHBOARD ABSENSI (TERSEMBUNYI/MODAL) -->
-    <!-- =============================================== -->
-    <div id="page-dashboard" class="page-content">
-      <div class="info-card my-4">
-          <div class="text-center mb-4">
-              <h1 class="text-warning" style="font-family: 'Cinzel', serif;">Dashboard Rekap Absensi</h1>
-              <p class="text-light opacity-75">Kelas XI G</p>
-          </div>
-
-          <!-- Kartu Ringkasan -->
-          <div class="row g-3 mb-4">
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Total Data</p>
-                      <h2 id="totData" class="fw-bold text-white">0</h2>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Hadir</p>
-                      <h2 id="totHadir" class="fw-bold text-success">0</h2>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Izin</p>
-                      <h2 id="totIzin" class="fw-bold text-warning">0</h2>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="p-3 bg-dark border border-secondary rounded text-center">
-                      <p class="small text-light opacity-75 mb-1">Sakit</p>
-                      <h2 id="totSakit" class="fw-bold text-danger">0</h2>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Tabel Data -->
-          <div class="mt-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h3 class="text-warning h5">Riwayat Kehadiran</h3>
-                  <button onclick="hapusDataAbsensi()" class="btn btn-sm btn-outline-danger">
-                      <i class="fa-solid fa-trash me-1"></i> Bersihkan Data
-                  </button>
-              </div>
-              <div class="table-responsive">
-                  <table class="table table-striped table-hover">
-                      <thead>
-                          <tr>
-                              <th>No</th>
-                              <th>Nama Siswa</th>
-                              <th>Tanggal</th>
-                              <th>Waktu</th>
-                              <th>Status</th>
-                          </tr>
-                      </thead>
-                      <tbody id="tabelData">
-                          <!-- Data diisi oleh JS -->
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-    </div>
-
-    <!-- Modal Proteksi Kata Sandi untuk Dashboard -->
-    <div class="modal fade" id="password-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center p-4">
-                    <h2 class="text-2xl fw-bold text-warning mb-2" style="font-family: 'Cinzel', serif;">Akses Terproteksi</h2>
-                    <p class="text-light opacity-75 mb-4">Masukkan kata sandi untuk membuka dashboard.</p>
-                    <form id="password-form"><div class="mb-3"><input type="password" id="password-input" placeholder="••••••••" class="form-control form-control-lg text-center"></div><button type="submit" class="btn btn-gold w-100 btn-lg">Buka Dashboard</button><p id="error-message" class="text-danger small mt-3" style="display: none;">Kata sandi salah! Akses ditolak.</p></form>
+  <!-- =============================================== -->
+  <!-- HALAMAN DASHBOARD (TERSEMBUNYI)                 -->
+  <!-- =============================================== -->
+  <div id="page-dashboard" class="page-content container my-4">
+    <!-- Kartu Rekap Absensi -->
+    <div class="info-card my-4">
+        <div class="text-center mb-4">
+            <h1 class="text-warning" style="font-family: 'Cinzel', serif;">Dashboard Rekap Absensi</h1>
+            <p class="text-light opacity-75">Kelas XI G</p>
+        </div>
+        <div class="row g-3 mb-4">
+            <div class="col-md-3 col-6"><div class="p-3 bg-dark border border-secondary rounded text-center"><p class="small text-light opacity-75 mb-1">Total Data</p><h2 id="totData" class="fw-bold text-white">0</h2></div></div>
+            <div class="col-md-3 col-6"><div class="p-3 bg-dark border border-secondary rounded text-center"><p class="small text-light opacity-75 mb-1">Hadir</p><h2 id="totHadir" class="fw-bold text-success">0</h2></div></div>
+            <div class="col-md-3 col-6"><div class="p-3 bg-dark border border-secondary rounded text-center"><p class="small text-light opacity-75 mb-1">Izin</p><h2 id="totIzin" class="fw-bold text-warning">0</h2></div></div>
+            <div class="col-md-3 col-6"><div class="p-3 bg-dark border border-secondary rounded text-center"><p class="small text-light opacity-75 mb-1">Sakit</p><h2 id="totSakit" class="fw-bold text-danger">0</h2></div></div>
+        </div>
+        <div class="mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <h3 class="text-warning h5 mb-0">Riwayat Kehadiran</h3>
+                <div class="d-flex gap-2">
+                    <button onclick="unduhDataCSV()" class="btn btn-sm btn-outline-success"><i class="fa-solid fa-file-csv me-1"></i> Unduh CSV</button>
+                    <button onclick="hapusDataAbsensi()" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash me-1"></i> Bersihkan Data</button>
                 </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Siswa</th>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Status</th>
+                            <th>Bukti</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelData"></tbody>
+                </table>
             </div>
         </div>
     </div>
+
+    <!-- Kartu Manajemen Galeri -->
+    <div class="info-card my-4">
+      <h3 class="text-warning border-bottom border-danger pb-2 mb-3 text-center">
+        <i class="fa-solid fa-photo-film me-2"></i>Manajemen Galeri Foto
+      </h3>
+      <form id="formGalleryUpload" class="mb-4">
+          <div class="row g-3">
+              <div class="col-md-6"><input type="text" id="galleryTitle" class="form-control" placeholder="Judul Foto" required></div>
+              <div class="col-md-6">
+                  <select id="galleryCategory" class="form-select" required>
+                      <option value="" disabled selected>-- Pilih Kategori --</option>
+                      <option value="classmeeting">Classmeeting</option>
+                      <option value="bakti">Kerja Bakti</option>
+                      <option value="ultah">Ulang Tahun</option>
+                      <option value="kebersamaan">Kebersamaan</option>
+                  </select>
+              </div>
+              <div class="col-12"><input type="file" id="galleryFile" class="form-control" accept="image/*" required></div>
+          </div>
+          <button type="submit" class="btn btn-gold w-100 mt-3">Upload Foto ke Galeri</button>
+      </form>
+      <h4 class="text-warning h5 mt-4">Daftar Foto Terupload</h4>
+      <div id="gallery-management-list" class="row g-3 mt-2">
+          <!-- Daftar foto untuk manajemen akan dimuat di sini oleh JS -->
+      </div>
+    </div>
+  </div>
 
     <!-- Modal Proteksi Kata Sandi untuk Dashboard -->
     <div class="modal fade" id="password-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
@@ -1124,6 +1050,35 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function initializeGallery() {
+        const GALLERY_KEY = 'gallery_images_xi_g';
+        const existingImages = localStorage.getItem(GALLERY_KEY);
+
+        // Jika belum ada gambar sama sekali di local storage, tambahkan gambar default
+        if (!existingImages) {
+            const defaultImages = [
+                {
+                    id: 1,
+                    title: 'Kekompakan siswa-siswi XI G',
+                    category: 'kebersamaan',
+                    src: 'https://lh3.googleusercontent.com/d/1KCt-dys95sLPZhE9L8s4kBj5Y_4qZ41T'
+                },
+                {
+                    id: 2,
+                    title: 'Surprise Ultah Bu Arini',
+                    category: 'ultah',
+                    src: 'https://lh3.googleusercontent.com/d/1bOGT5O7_4cY_1P34oPCLDDzk7_36X3UX'
+                }
+            ];
+            localStorage.setItem(GALLERY_KEY, JSON.stringify(defaultImages));
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeGallery();
+        loadGalleryFromStorage();
+    });
+
     function openLightbox(imgElement) {
       const modalImage = document.getElementById('lightboxImage');
       const modalTitle = document.getElementById('lightboxTitle');
@@ -1145,13 +1100,23 @@
       btnElement.classList.add('active', 'btn-gold');
       btnElement.classList.remove('btn-outline-warning');
 
-      const items = document.querySelectorAll('.gallery-item');
+      const items = document.querySelectorAll('#gallery-container .gallery-item');
       items.forEach(item => {
-        if (category === 'all' || item.classList.contains(category)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
+        item.style.display = (category === 'all' || item.classList.contains(category)) ? 'block' : 'none';
+      });
+    }
+
+    function loadGalleryFromStorage() {
+      const galleryImages = JSON.parse(localStorage.getItem('gallery_images_xi_g')) || [];
+      const galleryContainer = document.getElementById('gallery-container');
+      galleryContainer.innerHTML = '';
+
+      galleryImages.forEach(img => {
+        const itemHTML = `
+          <div class="col-md-4 col-sm-6 gallery-item ${img.category}" data-id="${img.id}">
+            <div class="card bg-dark border-warning overflow-hidden h-100 position-relative shadow"><img src="${img.src}" class="card-img-top gallery-img" alt="${img.title}" onclick="openLightbox(this)"><div class="card-body p-2 text-center"><small class="text-warning fw-bold">${img.category.charAt(0).toUpperCase() + img.category.slice(1)}</small><p class="card-text small text-light opacity-75 mb-0">${img.title}</p></div></div>
+          </div>`;
+        galleryContainer.innerHTML += itemHTML;
       });
     }
 
@@ -1263,6 +1228,7 @@
         if (passwordInput.value === KATA_SANDI_RAHASIA) {
             passwordModal.hide();
             switchPage('dashboard');
+            loadGalleryManagement();
             muatDataAbsensi();
         } else {
             errorMessage.style.display = 'block';
@@ -1303,6 +1269,90 @@
             muatDataAbsensi();
         }
     }
+
+    function unduhDataCSV() {
+        const dataAbsen = JSON.parse(localStorage.getItem('absensi_xi_g')) || [];
+
+        if (dataAbsen.length === 0) {
+            Swal.fire('Informasi', 'Tidak ada data absensi untuk diunduh.', 'info');
+            return;
+        }
+
+        // Header untuk file CSV
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "No,Nama Siswa,Tanggal,Waktu,Status\r\n";
+
+        // Menambahkan setiap baris data
+        dataAbsen.forEach((data, index) => {
+            const row = [index + 1, `"${data.nama}"`, `"${data.tanggal}"`, `"${data.waktu}"`, `"${data.status}"`].join(",");
+            csvContent += row + "\r\n";
+        });
+
+        // Membuat link sementara untuk memicu unduhan
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `rekap_absensi_xi_g_${new Date().toISOString().slice(0,10)}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // 3. Logika Manajemen Galeri
+    const formGalleryUpload = document.getElementById('formGalleryUpload');
+    if(formGalleryUpload) {
+        formGalleryUpload.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('galleryTitle').value;
+            const category = document.getElementById('galleryCategory').value;
+            const file = document.getElementById('galleryFile').files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    let galleryImages = JSON.parse(localStorage.getItem('gallery_images_xi_g')) || [];
+                    galleryImages.push({
+                        id: Date.now(), // ID unik untuk setiap foto
+                        title: title,
+                        category: category,
+                        src: event.target.result
+                    });
+                    localStorage.setItem('gallery_images_xi_g', JSON.stringify(galleryImages));
+                    
+                    Swal.fire('Berhasil', 'Foto telah ditambahkan ke galeri.', 'success');
+                    formGalleryUpload.reset();
+                    loadGalleryManagement(); // Muat ulang daftar manajemen
+                    loadGalleryFromStorage(); // Muat ulang galeri publik
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    function loadGalleryManagement() {
+        const galleryImages = JSON.parse(localStorage.getItem('gallery_images_xi_g')) || [];
+        const container = document.getElementById('gallery-management-list');
+        container.innerHTML = '';
+        if (galleryImages.length === 0) {
+            container.innerHTML = '<p class="text-light opacity-50">Belum ada foto yang diunggah.</p>';
+            return;
+        }
+        galleryImages.forEach(img => {
+            const itemHTML = `<div class="col-md-4" data-id="${img.id}"><div class="card bg-dark border-secondary"><img src="${img.src}" class="card-img-top" style="height: 150px; object-fit: cover;"><div class="card-body p-2"><p class="card-text small mb-1">${img.title}</p><button class="btn btn-sm btn-outline-danger w-100" onclick="deleteGalleryImage(${img.id})"><i class="fa-solid fa-trash me-1"></i> Hapus</button></div></div></div>`;
+            container.innerHTML += itemHTML;
+        });
+    }
+
+    function deleteGalleryImage(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus foto ini dari galeri?')) {
+            let galleryImages = JSON.parse(localStorage.getItem('gallery_images_xi_g')) || [];
+            const updatedImages = galleryImages.filter(img => img.id !== id);
+            localStorage.setItem('gallery_images_xi_g', JSON.stringify(updatedImages));
+            loadGalleryManagement();
+            loadGalleryFromStorage();
+        }
+    }
+
   </script>
 </body>
 </html>S

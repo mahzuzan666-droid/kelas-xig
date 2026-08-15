@@ -6,6 +6,8 @@
   <title>Website Resmi Kelas XI G</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Menggunakan SweetAlert2 untuk Pop Up Notifikasi -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Ma+Shan+Zheng&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   
   <style>
@@ -211,13 +213,25 @@
       transition: transform 0.3s ease, filter 0.3s ease;
     }
 
+    /* Animasi untuk item galeri */
+    @keyframes fadeInZoom {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     .gallery-img:hover {
       transform: scale(1.05);
       filter: brightness(1.1);
     }
 
     .gallery-item {
-      transition: all 0.4s ease;
+      animation: fadeInZoom 0.5s ease-out forwards;
     }
 
     footer {
@@ -280,7 +294,7 @@
   <header class="navbar navbar-expand-lg sticky-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-3" href="javascript:void(0)" onclick="switchPage('home')">
-        <img src="logo.png" alt="Logo XI G" class="logo-iks" onerror="this.src='https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip';">
+        <img src="https://lh3.googleusercontent.com/d/1pWQ36pj0S4w1nXPovpeLJsuL3fn_QH8a" alt="Logo MAN 1 Lamongan" class="logo-iks">
         <div class="logo-text">
           <h1>KELAS XI G</h1>
           <small class="text-light opacity-75">MAN 1 Lamongan</small>
@@ -305,7 +319,9 @@
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-jadwal" onclick="switchPage('jadwal')">Jadwal</a></li>
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-piket" onclick="switchPage('piket')">Piket</a></li>
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-galeri" onclick="switchPage('galeri')">Galeri</a></li>
+          <li class="nav-item"><a class="nav-link nav-btn" id="nav-siswa" onclick="switchPage('siswa')">Daftar Siswa</a></li>
           <li class="nav-item"><a class="nav-link nav-btn" id="nav-faq" onclick="switchPage('faq')">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link nav-btn" id="nav-absen" onclick="switchPage('absen')">Absensi</a></li>
           <li class="nav-item"><a class="nav-link" href="uang kas kelas xig.html" target="_blank" style="color: #ffc107 !important; font-weight: bold;">Uang Kas</a></li>
         </ul>
       </div>
@@ -316,7 +332,7 @@
     <!-- 1. BERANDA -->
     <div id="page-home" class="page-content active">
       <section class="hero-section rounded-4 my-3">
-        <img src="logo.png" alt="Logo XI G" class="logo-hero-iks mb-3" onerror="this.src='https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip';">
+        <img src="https://lh3.googleusercontent.com/d/1gEmFuudFPKULas1CZCmv3X7kJt7PZTip" alt="Logo XI G" class="logo-hero-iks mb-3">
         <h2 class="hero-title">THE GREATNESS CLASS</h2>
         <div class="chinese-title">團結 • 創造力 • 卓越</div>
         <p class="lead text-light opacity-75">"Solid, Kreatif, dan Berprestasi Tanpa Batas"</p>
@@ -377,26 +393,90 @@
         <div class="row g-3 justify-content-center">
           <div class="col-md-4 col-sm-6 text-center">
             <div class="p-4 bg-dark border border-warning rounded shadow">
-              <i class="fa-solid fa-user-tie fa-2x text-warning mb-2"></i>
+              <i class="fa-solid fa-user-shield fa-2x text-warning mb-2"></i>
               <h5 class="fw-bold text-white mb-2">Bu Arini</h5>
-              <span class="badge bg-danger px-3 py-1">Wali Kelas</span>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 text-center">
-            <div class="p-4 bg-dark border border-warning rounded shadow">
-              <i class="fa-solid fa-user-gear fa-2x text-warning mb-2"></i>
-              <h5 class="fw-bold text-white mb-2">Toriq</h5>
-              <span class="badge bg-danger px-3 py-1">Ketua Kelas</span>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 text-center">
-            <div class="p-4 bg-dark border border-warning rounded shadow">
-              <i class="fa-solid fa-user-pen fa-2x text-warning mb-2"></i>
-              <h5 class="fw-bold text-white mb-2">Cece</h5>
-              <span class="badge bg-danger px-3 py-1">Sekretaris</span>
+              <span class="badge bg-warning text-dark px-3 py-1">Wali Kelas</span>
             </div>
           </div>
         </div>
+        <div class="row g-3 justify-content-center mt-1">
+          <div class="col-md-4 col-sm-6 text-center">
+            <div class="p-4 bg-dark border border-warning rounded shadow">
+              <i class="fa-solid fa-crown fa-2x text-warning mb-2"></i>
+              <h5 class="fw-bold text-white mb-2">Toriq</h5>
+              <span class="badge bg-warning text-dark px-3 py-1">Ketua Kelas</span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 text-center">
+            <div class="p-4 bg-dark border border-warning rounded shadow">
+              <i class="fa-solid fa-user-group fa-2x text-warning mb-2"></i>
+              <h5 class="fw-bold text-white mb-2">Dianing</h5>
+              <span class="badge bg-warning text-dark px-3 py-1">Wakil Ketua Kelas</span>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3 justify-content-center mt-1">
+          <div class="col-md-4 col-sm-6 text-center">
+            <div class="p-4 bg-dark border border-warning rounded shadow">
+              <i class="fa-solid fa-book-open fa-2x text-warning mb-2"></i>
+              <h5 class="fw-bold text-white mb-2">Cece</h5>
+              <span class="badge bg-warning text-dark px-3 py-1">Sekretaris</span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 text-center">
+            <div class="p-4 bg-dark border border-warning rounded shadow">
+              <i class="fa-solid fa-book-open fa-2x text-warning mb-2"></i>
+              <h5 class="fw-bold text-white mb-2">Riza</h5>
+              <span class="badge bg-warning text-dark px-3 py-1">Sekretaris 2</span>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3 justify-content-center mt-1">
+          <div class="col-md-4 col-sm-6 text-center">
+            <div class="p-4 bg-dark border border-warning rounded shadow">
+              <i class="fa-solid fa-wallet fa-2x text-warning mb-2"></i>
+              <h5 class="fw-bold text-white mb-2">Leny</h5>
+              <span class="badge bg-warning text-dark px-3 py-1">Bendahara</span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 text-center">
+            <div class="p-4 bg-dark border border-warning rounded shadow">
+              <i class="fa-solid fa-wallet fa-2x text-warning mb-2"></i>
+              <h5 class="fw-bold text-white mb-2">Najwa</h5>
+              <span class="badge bg-warning text-dark px-3 py-1">Bendahara 2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seksi-Seksi Kelas -->
+        <h4 class="text-warning border-bottom border-danger pb-2 mb-4 mt-5 text-center">Seksi-Seksi Kelas</h4>
+        <div class="row g-3 justify-content-center">
+          <div class="col-md-3 col-sm-6 text-center">
+            <div class="p-3 bg-dark border border-secondary rounded shadow h-100">
+              <h6 class="fw-bold text-white mb-2">SIE KEAMANAN</h6>
+              <ul class="list-unstyled mb-0 small text-light opacity-75"><li>Rahma</li><li>Ubed</li></ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 text-center">
+            <div class="p-3 bg-dark border border-secondary rounded shadow h-100">
+              <h6 class="fw-bold text-white mb-2">SIE KEBERSIHAN</h6>
+              <ul class="list-unstyled mb-0 small text-light opacity-75"><li>Ajeng</li><li>Najwa</li></ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 text-center">
+            <div class="p-3 bg-dark border border-secondary rounded shadow h-100">
+              <h6 class="fw-bold text-white mb-2">SIE UBUDIYAH</h6>
+              <ul class="list-unstyled mb-0 small text-light opacity-75"><li>Nisa</li><li>Abiyyu</li></ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 text-center">
+            <div class="p-3 bg-dark border border-secondary rounded shadow h-100">
+              <h6 class="fw-bold text-white mb-2">SIE KESEHATAN</h6>
+              <ul class="list-unstyled mb-0 small text-light opacity-75"><li>Fizi</li><li>Shita</li></ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -409,10 +489,11 @@
             <div class="p-3 bg-dark border border-warning rounded h-100">
               <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Senin</h5>
               <ul class="list-unstyled ps-2 mb-0">
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Fisika</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTL</li>
                 <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Kimia</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Fiqih</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK TL</li>
-                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Inggris</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Aqidah</li>
+                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Informatika</li>
               </ul>
             </div>
           </div>
@@ -420,11 +501,11 @@
             <div class="p-3 bg-dark border border-warning rounded h-100">
               <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Selasa</h5>
               <ul class="list-unstyled ps-2 mb-0">
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Geografi</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>PKN</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>PJOK</li>
                 <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Fisika</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Aqidah</li>
-                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Senbud</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>PPKN</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTL</li>
+                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Inggris</li>
               </ul>
             </div>
           </div>
@@ -432,12 +513,11 @@
             <div class="p-3 bg-dark border border-warning rounded h-100">
               <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Rabu</h5>
               <ul class="list-unstyled ps-2 mb-0">
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Biologi</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Informatika</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>PJOK</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK TL</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Arab</li>
-                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Fisika</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Geografi</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Seni Budaya</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Kimia</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>SKI</li>
+                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Biologi/Riset</li>
               </ul>
             </div>
           </div>
@@ -445,12 +525,11 @@
             <div class="p-3 bg-dark border border-warning rounded h-100">
               <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Kamis</h5>
               <ul class="list-unstyled ps-2 mb-0">
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>BK</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Al-Quran Hadist</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Indonesia</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Sejarah Indonesia</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK</li>
-                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Tahfidz</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Prakarya</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Geografi</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Fiqih</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Sejarah</li>
+                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Al-Quran Hadist</li>
               </ul>
             </div>
           </div>
@@ -458,17 +537,12 @@
             <div class="p-3 bg-dark border border-warning rounded h-100">
               <h5 class="text-danger fw-bold text-center border-bottom border-secondary pb-2 mb-3">Jumat</h5>
               <ul class="list-unstyled ps-2 mb-0">
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Kimia</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>SKI</li>
-                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>Geografi</li>
-                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Prakarya</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Indonesia</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>MTK Umum</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>B. Arab</li>
+                <li class="py-1 border-bottom border-secondary border-opacity-25"><i class="fa-solid fa-book text-warning me-2 small"></i>BK</li>
+                <li class="py-1"><i class="fa-solid fa-book text-warning me-2 small"></i>Tahfidz</li>
               </ul>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6">
-            <div class="p-3 bg-dark border border-warning rounded h-100 text-center d-flex flex-column justify-content-center">
-              <h5 class="text-danger fw-bold border-bottom border-secondary pb-2 mb-3">Sabtu</h5>
-              <h4 class="text-warning fw-bold my-3">LIBURRR!! 🎉</h4>
             </div>
           </div>
         </div>
@@ -570,12 +644,33 @@
           <button class="btn btn-outline-warning btn-sm rounded-pill filter-btn" onclick="filterGallery('classmeeting', this)">Classmeeting</button>
           <button class="btn btn-outline-warning btn-sm rounded-pill filter-btn" onclick="filterGallery('bakti', this)">Kerja Bakti</button>
           <button class="btn btn-outline-warning btn-sm rounded-pill filter-btn" onclick="filterGallery('ultah', this)">Ulang Tahun</button>
+          <button class="btn btn-outline-warning btn-sm rounded-pill filter-btn" onclick="filterGallery('kebersamaan', this)">Kebersamaan</button>
         </div>
 
         <!-- Grid Foto -->
         <div class="row g-3" id="gallery-container">
-          <div class="col-md-4 col-sm-6 gallery-item classmeeting">
+          <div class="col-md-4 col-sm-6 gallery-item kebersamaan">
             <div class="card bg-dark border-warning overflow-hidden h-100 position-relative shadow">
+              <img src="https://lh3.googleusercontent.com/d/1KCt-dys95sLPZhE9L8s4kBj5Y_4qZ41T" class="card-img-top gallery-img" alt="Momen Kebersamaan XI G" onclick="openLightbox(this)" onerror="this.src='https://via.placeholder.com/400x250/181818/D4AF37?text=Foto+Kebersamaan';">
+              <div class="card-body p-2 text-center">
+                <small class="text-warning fw-bold">Kebersamaan</small>
+                <p class="card-text small text-light opacity-75 mb-0">Kekompakan siswa-siswi XI G</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-6 gallery-item ultah">
+            <div class="card bg-dark border-warning overflow-hidden h-100 position-relative shadow">
+              <img src="https://lh3.googleusercontent.com/d/1bOGT5O7_4cY_1P34oPCLDDzk7_36X3UX" class="card-img-top gallery-img" alt="Ulang Tahun Bu Arini" onclick="openLightbox(this)" onerror="this.src='https://via.placeholder.com/400x250/181818/D4AF37?text=Foto+Ulang+Tahun';">
+              <div class="card-body p-2 text-center">
+                <small class="text-warning fw-bold">Ulang Tahun</small>
+                <p class="card-text small text-light opacity-75 mb-0">Surprise Ultah Bu Arini</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-6 gallery-item classmeeting">
+            <div class="card bg-dark border-warning overflow-hidden h-100 position-relative shadow">_
               <img src="foto1.jpg" class="card-img-top gallery-img" alt="Juara Futsal Classmeeting" onclick="openLightbox(this)" onerror="this.src='https://via.placeholder.com/400x250/181818/D4AF37?text=Foto+Classmeeting';">
               <div class="card-body p-2 text-center">
                 <small class="text-warning fw-bold">Classmeeting</small>
@@ -593,16 +688,83 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="col-md-4 col-sm-6 gallery-item ultah">
-            <div class="card bg-dark border-warning overflow-hidden h-100 position-relative shadow">
-              <img src="foto3.jpg" class="card-img-top gallery-img" alt="Ulang Tahun Bu Arini" onclick="openLightbox(this)" onerror="this.src='https://via.placeholder.com/400x250/181818/D4AF37?text=Foto+Ulang+Tahun';">
-              <div class="card-body p-2 text-center">
-                <small class="text-warning fw-bold">Ulang Tahun</small>
-                <p class="card-text small text-light opacity-75 mb-0">Surprise Ultah Bu Arini</p>
-              </div>
+    <!-- 8. ABSENSI -->
+    <div id="page-absen" class="page-content">
+      <div class="info-card my-4">
+        <div class="text-center mb-4">
+          <h3 class="text-warning border-bottom border-danger pb-2 mb-3">
+            <i class="fa-solid fa-user-check me-2"></i>Absensi Kelas XI G
+          </h3>
+          <p class="text-light opacity-75">Sistem Kehadiran Digital</p>
+          <div id="clock-absen" class="text-xl font-semibold text-warning mt-2 bg-dark py-2 rounded-lg border border-warning">00:00:00</div>
+        </div>
+
+        <form id="formAbsen" class="space-y-4">
+          <div>
+            <label for="tanggal-absen" class="form-label">Tanggal</label>
+            <input type="text" id="tanggal-absen" readonly class="form-control bg-secondary bg-opacity-25 text-light border-secondary">
+          </div>
+
+          <div>
+            <label for="namaSiswa" class="form-label">Nama Siswa</label>
+            <select id="namaSiswa" required class="form-select">
+              <option value="" disabled selected>-- Pilih Nama Anda --</option>
+              <option value="ABIYYU SOFYAN">1. ABIYYU SOFYAN</option>
+              <option value="AHMAD DAFFA ALIIFUDIN">2. AHMAD DAFFA ALIIFUDIN</option>
+              <option value="AISYAH RAHMATUL KHUSNA">3. AISYAH RAHMATUL KHUSNA</option>
+              <option value="AL HAIDAR ALLYZATI SATRIA UTAMA">4. AL HAIDAR ALLYZATI SATRIA UTAMA</option>
+              <option value="ALIFIA ANAZWA MA'RIFAH">5. ALIFIA ANAZWA MA'RIFAH</option>
+              <option value="ARSA NABIHA MAHESWARA">6. ARSA NABIHA MAHESWARA</option>
+              <option value="ASMAUL HUSNIATI AULIYAH">7. ASMAUL HUSNIATI AULIYAH</option>
+              <option value="BAGAS OKTA MAULANA ALGHIVANIE">8. BAGAS OKTA MAULANA ALGHIVANIE</option>
+              <option value="DIANING FITHRIYYAH">9. DIANING FITHRIYYAH</option>
+              <option value="FAJRUL RIZKY PRATAMA">10. FAJRUL RIZKY PRATAMA</option>
+              <option value="FERDHIAN ZAIDHAN PUTRA ANDREAF">11. FERDHIAN ZAIDHAN PUTRA ANDREAF</option>
+              <option value="HUMAIRA' SYIFA ASHLAHAH">12. HUMAIRA' SYIFA ASHLAHAH</option>
+              <option value="ITSNA MEHRUNISA IFFAT">13. ITSNA MEHRUNISA IFFAT</option>
+              <option value="JANNATUL FIRDAUSI NUZULA">14. JANNATUL FIRDAUSI NUZULA</option>
+              <option value="MAHZUZAN JULIANO ADIPTYA">15. MAHZUZAN JULIANO ADIPTYA</option>
+              <option value="MOCH. FERDIANSYAH">16. MOCH. FERDIANSYAH</option>
+              <option value="MOCHAMAD HANAFI NUR ALAMSYAH">17. MOCHAMAD HANAFI NUR ALAMSYAH</option>
+              <option value="MOCHAMMAD FADLI AL-FARID FAIZAL">18. MOCHAMMAD FADLI AL-FARID FAIZAL</option>
+              <option value="MOH. FARHAN ALAKBAR">19. MOH. FARHAN ALAKBAR</option>
+              <option value="MOH. FARIS HUMAM">20. MOH. FARIS HUMAM</option>
+              <option value="MOH. SHOLAHUDDIN RIZA">21. MOH. SHOLAHUDDIN RIZA</option>
+              <option value="MUCHAMMAD YUSUF FITRIANSYAH">22. MUCHAMMAD YUSUF FITRIANSYAH</option>
+              <option value="MUHAMMAD AIMAN ABDURROZIQ">23. MUHAMMAD AIMAN ABDURROZIQ</option>
+              <option value="MUHAMMAD FAIZ AL FAHRIZI">24. MUHAMMAD FAIZ AL FAHRIZI</option>
+              <option value="MUHAMMAD MELVIN MAULANA">25. MUHAMMAD MELVIN MAULANA</option>
+              <option value="MUHAMMAD SYAFIYYUL 'AINUN THORIQ">26. MUHAMMAD SYAFIYYUL 'AINUN THORIQ</option>
+              <option value="MUHAMMAD RAFA DINILLAH">27. MUHAMMAD RAFA DINILLAH</option>
+              <option value="MUHAMMAD UBAIDILLAH RIZQI">28. MUHAMMAD UBAIDILLAH RIZQI</option>
+              <option value="NAJWA AIRA NURHAYATI">29. NAJWA AIRA NURHAYATI</option>
+              <option value="NAZILA ZALFA">30. NAZILA ZALFA</option>
+              <option value="PUTRI LAILENY RANIAH">31. PUTRI LAILENY RANIAH</option>
+              <option value="QIEA AYU SAHARA">32. QIEA AYU SAHARA</option>
+              <option value="RAHMA AJENG FITRIYATI">33. RAHMA AJENG FITRIYATI</option>
+              <option value="REYHANNA HILALLYAH">34. REYHANNA HILALLYAH</option>
+              <option value="SHINDY AMALIA EKA LESTARI">35. SHINDY AMALIA EKA LESTARI</option>
+              <option value="SHITA DWI ARIFA UTAMI">36. SHITA DWI ARIFA UTAMI</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="form-label">Keterangan</label>
+            <div class="d-flex justify-content-around">
+              <div class="form-check"><input class="form-check-input" type="radio" name="status" id="statusHadir" value="Hadir" required><label class="form-check-label" for="statusHadir">Hadir</label></div>
+              <div class="form-check"><input class="form-check-input" type="radio" name="status" id="statusIzin" value="Izin"><label class="form-check-label" for="statusIzin">Izin</label></div>
+              <div class="form-check"><input class="form-check-input" type="radio" name="status" id="statusSakit" value="Sakit"><label class="form-check-label" for="statusSakit">Sakit</label></div>
             </div>
           </div>
+
+          <button type="submit" class="btn btn-gold w-100 mt-3">Kirim Absen</button>
+        </form>
+        <div class="text-center mt-4">
+          <a href="Absensi_XIG/dashboard.html" target="_blank" class="btn btn-outline-warning btn-sm">Lihat Rekap Absensi &rarr;</a>
         </div>
       </div>
     </div>
@@ -691,6 +853,11 @@
       if (clockElement) {
         clockElement.textContent = `${hours}:${minutes}:${seconds}`;
       }
+      // Update jam di halaman absensi juga
+      const clockAbsenElement = document.getElementById('clock-absen');
+      if (clockAbsenElement) {
+        clockAbsenElement.textContent = `${hours}:${minutes}:${seconds}`;
+      }
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -737,6 +904,7 @@
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active', 'btn-gold');
         btn.classList.add('btn-outline-warning');
+        btn.blur(); // Hapus fokus dari tombol
       });
       
       btnElement.classList.add('active', 'btn-gold');
@@ -749,6 +917,36 @@
         } else {
           item.style.display = 'none';
         }
+      });
+    }
+
+    // --- LOGIKA UNTUK ABSENSI ---
+    const dateInputAbsen = document.getElementById('tanggal-absen');
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    if(dateInputAbsen) {
+      dateInputAbsen.value = today.toLocaleDateString('id-ID', options);
+    }
+
+    const formAbsen = document.getElementById('formAbsen');
+    if(formAbsen) {
+      formAbsen.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const nama = document.getElementById('namaSiswa').value;
+          const tanggal = document.getElementById('tanggal-absen').value;
+          const waktu = new Date().toLocaleTimeString('id-ID');
+          const status = document.querySelector('input[name="status"]:checked').value;
+
+          let dataAbsen = JSON.parse(localStorage.getItem('absensi_xi_g')) || [];
+          dataAbsen.push({ nama, tanggal, waktu, status });
+          localStorage.setItem('absensi_xi_g', JSON.stringify(dataAbsen));
+
+          Swal.fire({
+              title: 'Berhasil!',
+              text: 'Terima kasih, absen kamu telah tercatat.',
+              icon: 'success',
+          }).then(() => { this.reset(); });
       });
     }
   </script>
